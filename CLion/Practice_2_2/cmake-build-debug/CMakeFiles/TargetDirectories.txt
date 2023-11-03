@@ -1,0 +1,3 @@
+C:/Users/shilo/Документы/GitСlones/Structures_and_algorithms/Practice_2-2/cmake-build-debug/CMakeFiles/Practice_2_2.dir
+C:/Users/shilo/Документы/GitСlones/Structures_and_algorithms/Practice_2-2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/shilo/Документы/GitСlones/Structures_and_algorithms/Practice_2-2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
