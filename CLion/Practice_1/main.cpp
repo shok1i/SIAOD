@@ -49,7 +49,7 @@ int Number_5(int x, int n){
 }
 
 int main() {
-    int x, n;j
+    int x, n;
     setlocale(LC_ALL, "ru");
     system("chcp 65001");
     std::cout   << "Поле для ввода:" << std::endl;

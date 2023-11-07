@@ -1,3 +1,3 @@
-C:/Users/shilo/Документы/GitСlones/Structures_and_algorithms/Practice_2/cmake-build-debug/CMakeFiles/Practice_2.dir
-C:/Users/shilo/Документы/GitСlones/Structures_and_algorithms/Practice_2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/shilo/Документы/GitСlones/Structures_and_algorithms/Practice_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/shilo/Документы/GIT/SIAOD/CLion/Practice_2/cmake-build-debug/CMakeFiles/Practice_2.dir
+C:/Users/shilo/Документы/GIT/SIAOD/CLion/Practice_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/shilo/Документы/GIT/SIAOD/CLion/Practice_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
