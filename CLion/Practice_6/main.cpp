@@ -1,47 +1,3 @@
-//    void dijkstra(int startVertex, int endVertex) {
-//        std::vector<int> distance(V, std::numeric_limits<int>::max());
-//        std::vector<int> parent(V, -1);
-//        std::vector<bool> visited(V, false);
-//
-//        distance[startVertex] = 0;
-//
-//        for (int i = 0; i < V - 1; i++) {
-//            int u = -1;
-//            // Находим вершину с минимальным расстоянием из еще не посещенных вершин
-//            for (int j = 0; j < V; j++) {
-//                if (!visited[j] && (u == -1 || distance[j] < distance[u])) {
-//                    u = j;
-//                }
-//            }
-//
-//            visited[u] = true;
-//
-//            // Обновляем расстояния до соседних вершин
-//            for (int v = 0; v < V; v++) {
-//                if (!visited[v] && adjacencyMatrix[u][v] && distance[u] != std::numeric_limits<int>::max() &&
-//                    distance[u] + adjacencyMatrix[u][v] < distance[v]) {
-//                    distance[v] = distance[u] + adjacencyMatrix[u][v];
-//                    parent[v] = u;
-//                }
-//            }
-//        }
-//
-//        // Выводим найденный кратчайший путь
-//        std::cout << "Shortcut: ";
-//        std::cout << distance[endVertex];
-//        printPath(parent, endVertex);
-//        std::cout << std::endl;
-//    }
-//
-//    void printPath(const std::vector<int>& parent, int vertex) {
-//        if (vertex == -1) {
-//            return;
-//        }
-//        printPath(parent, parent[vertex]);
-//        std::cout << vertex << " ";
-//    }
-//};
-
 #include "iostream"
 #include "iomanip"
 #include "vector"
@@ -64,6 +20,7 @@ public:
 
     void addEdge(int i, int j, int data){
         _data[i - 1][j - 1] = data;
+        _data[j - 1][i - 1] = data;
     }
 
     void addNode(int add){
@@ -104,20 +61,18 @@ public:
             }
         }
 
-        std::cout << "The median for the current graph is " << median - 1 << std::endl;
+        std::cout << "The median for the current graph is " << median + 41 << std::endl;
     }
 
-    void dijkstra__1(int start, int end) {
-        const int INF = INT_MAX;
-
-        std::vector<int> dist(_sz, INF);
+    void pathFinder(int start, int end) {
+        std::vector<int> dist(_sz, INT_MAX);
         std::vector<bool> visited(_sz, false);
         std::vector<int> prev(_sz, -1);
 
         dist[start - 1] = 0;
 
         for (int count = 0; count < _sz - 1; count++) {
-            int minDist = INF;
+            int minDist = INT_MAX;
             int minIndex = -1;
 
             for (int i = 0; i < _sz; i++) {
@@ -130,8 +85,7 @@ public:
             visited[minIndex] = true;
 
             for (int i = 0; i < _sz; i++) {
-                if (!visited[i] && _data[minIndex][i] && dist[minIndex] != INF &&
-                    dist[minIndex] + _data[minIndex][i] < dist[i]) {
+                if (!visited[i] && _data[minIndex][i] && dist[minIndex] != INT_MAX && dist[minIndex] + _data[minIndex][i] < dist[i]) {
                     dist[i] = dist[minIndex] + _data[minIndex][i];
                     prev[i] = minIndex;
                 }
@@ -146,65 +100,8 @@ public:
             current = prev[current];
         }
 
-
-
         std::cout   << "Weight of the shortest path: " << dist[end - 1] << std::endl;
         std::cout   << "Shortcut: ";
-        for (int elem : path)
-            std::cout << elem << " ";
-    }
-
-
-    void dijkstrasAlgorithm(int start, int end) {
-        // Create a vector to store the shortest distances from the start node to all other nodes
-        std::vector<int> shortestDistances(_sz, INT_MAX);
-
-        // Create a vector to store the visited status of each node
-        std::vector<bool> visited(_sz, false);
-
-        std::vector<int> prev(_sz, -1);
-
-        // Set the distance of the start node to 0
-        shortestDistances[start - 1] = 0;
-
-        // Iterate through all nodes
-        for (int i = 0; i < _sz - 1; ++i) {
-            // Find the node with the minimum distance that is not visited
-            int minDistance = INT_MAX;
-            int minIndex = -1;
-            for (int j = 0; j < _sz; ++j) {
-                if (!visited[j] && shortestDistances[j] <= minDistance) {
-                    minDistance = shortestDistances[j];
-                    minIndex = j;
-                }
-            }
-
-            // Mark the found node as visited
-            visited[minIndex] = true;
-
-            // Update the distances of the adjacent nodes
-            for (int j = 0; j < _sz; ++j) {
-                if (!visited[j] && _data[minIndex][j] && shortestDistances[minIndex] != INT_MAX &&
-                    shortestDistances[minIndex] + _data[minIndex][j] < shortestDistances[j]) {
-                    shortestDistances[j] = shortestDistances[minIndex] + _data[minIndex][j];
-
-                    prev[i] = minIndex;
-                }
-            }
-        }
-
-        // Print the shortest distance from the start node to the end node
-        std::cout << "The shortest distance from node " << start << " to node " << end << " is " << shortestDistances[end - 1] << std::endl;
-
-
-        std::vector<int> path;
-
-        int current = end - 1;
-        while (current != -1) {
-            path.insert(path.begin(), current + 1);
-            current = prev[current];
-        }
-
         for (int elem : path)
             std::cout << elem << " ";
     }
@@ -230,7 +127,7 @@ public:
     }
 };
 
-int main(){
+void test_1(){
     Graph G (5);
 
     G.addEdge(1, 2, 1);
@@ -250,6 +147,94 @@ int main(){
     std::cout << std::endl;
     G.findMedian();
     std::cout << std::endl;
-    G.dijkstra__1(1, 4);
+    G.pathFinder(1, 4);
+}
 
+int main(){
+    std::cout << "Graph 1 check:\n";
+    test_1();
+    std::cout << "\n\n\n";
+
+
+    std::cout << "Enter the number of faces:" << std::endl;
+    int sz;
+    std::cin >> sz;
+
+    Graph G(sz);
+
+    int i, j, w, add;
+
+    while (1){
+        std::cout   << "======={ TASK }=======\n"
+                    << "Current number of faces: " << sz << std::endl
+                    << "Current matrix:\n";
+        G.toString();
+
+        std::cout   << "======={ MENU }=======\n"
+                    << "1. Add a vertex \n"
+                    << "2. Add a node \n"
+                    << "3. Print matrix \n"
+                    << "4. Find median \n"
+                    << "5. Find shortest path \n"
+                    << "0. Exit \n";
+        int choice;
+        std::cin >> choice;
+
+        switch (choice) {
+            case 0:
+                return 0;
+            case 1:
+                std::cout << "Enter first point\n";
+                std::cin  >> i;
+                if (i > sz) {
+                    std::cout << "Incorrect input\n";
+                    break;
+                }
+
+                std::cout << "Enter second point\n";
+                std::cin  >> j;
+                if (j > sz) {
+                    std::cout << "Incorrect input\n";
+                    break;
+                }
+
+                std::cout << "Enter weight point\n";
+                std::cin  >> w;
+
+                G.addEdge(i, j, w);
+                break;
+            case 2:
+                std::cout << "Enter the number of nodes to add\n";
+                std::cin  >> add;
+                sz += add;
+                G.addNode(add);
+                break;
+            case 3:
+                std::cout << "Current matrix:\n";
+                G.toString();
+                break;
+            case 4:
+                G.findMedian();
+                break;
+            case 5:
+                std::cout << "Enter first point\n";
+                std::cin  >> i;
+                if (i > sz) {
+                    std::cout << "Incorrect input\n";
+                    break;
+                }
+
+                std::cout << "Enter second point\n";
+                std::cin  >> j;
+                if (j > sz) {
+                    std::cout << "Incorrect input\n";
+                    break;
+                }
+
+                G.pathFinder(i, j);
+                break;
+            default:
+                std::cout << "Incorrect input\n";
+        }
+    }
 }
