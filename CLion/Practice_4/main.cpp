@@ -151,6 +151,5 @@ int main() {
          << "Is Expression tree       ->  " << (isExpressionTree(root) ? "Yes" : "No") << endl
          << "Contains multiplication  ->  " << (containsMultiplication(root) ? "Yes" : "No") << endl;
 
-
     return 0;
 }
