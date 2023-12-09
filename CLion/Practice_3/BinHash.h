@@ -14,8 +14,10 @@ public:
         if (!InputFile) { cout << "Failed to open files\n"; return; }
 
         BankAccount bank;
+        int i = 0;
         while (InputFile.read(reinterpret_cast<char*> (&bank), sizeof(BankAccount))){
-            hashTable.Insert(bank);
+            i++;
+            hashTable.Insert(i);
         }
 
         cout << "The bonding was successful!" << endl;
@@ -27,12 +29,12 @@ public:
         hashTable.Remove(key);
     }
 
-    BankAccount Search(int key){
+    int Search(int key){
         return hashTable.Search(key);
     }
 
     void Display(string BinaryFilename){
-        bin.PrintBinary(BinaryFilename);
+        // bin.PrintBinary(BinaryFilename);
         hashTable.PrintHash();
     }
 

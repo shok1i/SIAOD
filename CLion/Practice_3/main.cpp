@@ -34,11 +34,9 @@ int main() {
         else if (i == 7){
             cout << "Enter the key number to search for" << endl;
             cin  >> key;
-            BankAccount temp = hashBin.Search(key);
+            int temp = hashBin.Search(key);
             cout << "Your key is " << key << endl
-                    << " || AccountNumber || " << temp.accountNumber
-                    << " || Name || " << temp.fullName
-                    << " || Address || " << temp.address << endl;
+                    << " hash " << temp << endl;
         }
         else if (i == 8) hashBin.Display("bin.txt");
         else cout << "Wrong number" << endl;
