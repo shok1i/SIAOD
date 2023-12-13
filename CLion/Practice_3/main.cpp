@@ -7,6 +7,15 @@ int main() {
     HashBin hashBin;
     HashTable hashTable;
 
+    bin.Search(1);
+    bin.Search(250);
+    bin.Search(500);
+
+    hashBin.Linking("bin.txt");
+    hashBin.TimeS(1);
+    hashBin.TimeS(250);
+    hashBin.TimeS(500);
+
     int i = 0;
     int key = 0;
 
@@ -45,5 +54,4 @@ int main() {
 
         cout << "\n\n";
     }
-
 }

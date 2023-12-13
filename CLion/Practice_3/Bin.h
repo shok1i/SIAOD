@@ -5,6 +5,8 @@
 #include <string>
 #include <fstream>
 
+#include <chrono>
+
 using namespace std;
 
 struct BankAccount {
@@ -58,6 +60,25 @@ public:
         remove(BinaryFilename.c_str());
         temp.close();
         rename("temp.txt", BinaryFilename.c_str());
+    }
+    void Search (int Code){
+        fstream BinaryFile("text.txt", ios::binary);
+        BankAccount bank;
+
+        auto begin = std::chrono::steady_clock::now();
+
+        cout << Code << "\t| ";
+        while (BinaryFile.read(reinterpret_cast<char*> (&bank), sizeof(BankAccount)))
+            if (bank.accountNumber == Code) {
+                cout << " Code:: " << bank.accountNumber << " Name:: " << bank.fullName << " Address:: " << bank.address << endl;
+                break;
+            }
+
+        auto end = std::chrono::steady_clock::now();
+        auto elapsed_ms = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+
+        std::cout << "The time: " << elapsed_ms.count() << " ns\n";
+        BinaryFile.close();
     }
 
 // Сделать BinTest

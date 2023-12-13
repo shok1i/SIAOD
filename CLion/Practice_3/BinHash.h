@@ -31,13 +31,14 @@ public:
         return hashTable.Search(key);
     }
 
+    void TimeS(int code){
+        hashTable.TimeS(code);
+    }
+
     void Display(string BinaryFilename){
         bin.PrintBinary(BinaryFilename);
         hashTable.PrintHash();
     }
-
-
-
 };
 
 #endif //ABOBA_BINHASH_H

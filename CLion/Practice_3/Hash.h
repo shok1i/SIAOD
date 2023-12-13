@@ -52,6 +52,7 @@ public:
 
         while (table[index].accountNumber != 0) {
             if (table[index].accountNumber == account.accountNumber) {
+
                 std::cout << "An account with this number already exists. Data update." << std::endl;
                 table[index] = account;
                 return;
@@ -75,6 +76,23 @@ public:
         }
 
         return BankAccount(0, "", ""); // Счет не найден
+    }
+
+    void TimeS(int accountNumber){
+        int index = hash1(accountNumber);
+        int step = hash2(accountNumber);
+
+        auto begin = std::chrono::steady_clock::now();
+
+        while (table[index].accountNumber != 0) {
+            if (table[index].accountNumber == accountNumber) {
+                auto end = std::chrono::steady_clock::now();
+                auto elapsed_ms = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+
+                std::cout << "The time: " << elapsed_ms.count() << " ns\n";
+            }
+            index = (index + step) % table.size();
+        }
     }
 // Done
     void Remove(int accountNumber) {
