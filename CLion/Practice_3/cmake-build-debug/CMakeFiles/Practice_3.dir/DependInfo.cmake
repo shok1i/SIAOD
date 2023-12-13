@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "D:/System/Documents/GitClones/SIAOD/CLion/Practice_3/main.cpp" "CMakeFiles/Practice_3.dir/main.cpp.obj" "gcc" "CMakeFiles/Practice_3.dir/main.cpp.obj.d"
+  "C:/Users/shilo/Documents/GitClones/SIAOD/CLion/Practice_3/main.cpp" "CMakeFiles/Practice_3.dir/main.cpp.obj" "gcc" "CMakeFiles/Practice_3.dir/main.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

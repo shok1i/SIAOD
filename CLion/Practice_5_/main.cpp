@@ -76,7 +76,7 @@ void testRBST(){
     cout << "Add elem with key 910000" << endl;
     CarRecord* temp = new CarRecord (910000, "BRAND-ADDED", "OWNER-ADDED");
     rbst.insert(910000, temp);
-    x
+
     cout << "===[  RandomizedBST  ]===" << endl;
     rbst.printTree();
     cout << endl;
@@ -84,16 +84,6 @@ void testRBST(){
     cout << "Search elem with key 910542" << endl;
     rbst.search(910542);
 }
-
-
-class test{
-    int node;
-};
-
-void tess(test fsd){
-
-}
-
 
 int main(){
 

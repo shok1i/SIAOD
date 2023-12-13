@@ -34,8 +34,6 @@ private:
         return node;
     }
 
-
-
     NodeBin* searchRecursive(NodeBin* node, int key) {
         if (node == nullptr || node->key == key){
             return node;

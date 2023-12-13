@@ -9,7 +9,7 @@
 class HashTable {
 private:
     static const int BASE_TABLE = 4;
-    std::vector<BankAccount> table;
+    std::vector<int> table;
     int size = 0;
 
     int hash1(int accountNumber) { return accountNumber % table.size(); }
@@ -18,14 +18,14 @@ private:
 
     void resizeAndRehash() {
         int newTableSize = table.size() * 2;
-        std::vector<BankAccount> newTable(newTableSize);
+        std::vector<int> newTable(newTableSize);
 
-        for (const BankAccount& account : table) {
-            if (account.accountNumber != 0) {
-                int index = hash1(account.accountNumber);
-                int step = hash2(account.accountNumber);
+        for (const int account : table) {
+            if (account != 0) {
+                int index = hash1(account);
+                int step = hash2(account);
 
-                while (newTable[index].accountNumber != 0) {
+                while (newTable[index] != 0) {
                     index = (index + step) % newTableSize;
                 }
 
@@ -39,69 +39,51 @@ private:
 public:
 // Done
     HashTable(){
-        table = std::vector<BankAccount>(BASE_TABLE);
+        table = std::vector<int>(BASE_TABLE);
     }
 // Done
-    void Insert(BankAccount account) {
+    void Insert(int pos) {
         if(size == table.size()-1){
             resizeAndRehash();
         }
 
-        int index = hash1(account.accountNumber);
-        int step = hash2(account.accountNumber);
+        int index = hash1(pos);
+        int step = hash2(pos);
 
-        while (table[index].accountNumber != 0) {
-            if (table[index].accountNumber == account.accountNumber) {
-
+        while (table[index] != 0) {
+            if (table[index] == pos) {
                 std::cout << "An account with this number already exists. Data update." << std::endl;
-                table[index] = account;
+                table[index] = pos;
                 return;
             }
             index = (index + step) % table.size();
         }
 
-        table[index] = account;
+        table[index] = pos;
         size++;
     }
 // Done
-    BankAccount Search(int accountNumber) {
+    int Search(int accountNumber) {
         int index = hash1(accountNumber);
         int step = hash2(accountNumber);
 
-        while (table[index].accountNumber != 0) {
-            if (table[index].accountNumber == accountNumber) {
+        while (table[index] != 0) {
+            if (table[index] == accountNumber) {
                 return table[index];
             }
             index = (index + step) % table.size();
         }
 
-        return BankAccount(0, "", ""); // Счет не найден
-    }
-
-    void TimeS(int accountNumber){
-        int index = hash1(accountNumber);
-        int step = hash2(accountNumber);
-
-        auto begin = std::chrono::steady_clock::now();
-
-        while (table[index].accountNumber != 0) {
-            if (table[index].accountNumber == accountNumber) {
-                auto end = std::chrono::steady_clock::now();
-                auto elapsed_ms = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-
-                std::cout << "The time: " << elapsed_ms.count() << " ns\n";
-            }
-            index = (index + step) % table.size();
-        }
+        return 0; // Счет не найден
     }
 // Done
     void Remove(int accountNumber) {
         int index = hash1(accountNumber);
         int step = hash2(accountNumber);
 
-        while (table[index].accountNumber != 0) {
-            if (table[index].accountNumber == accountNumber) {
-                table[index] = BankAccount(0, "", ""); // Очищаем ячейку
+        while (table[index] != 0) {
+            if (table[index] == accountNumber) {
+                table[index] = 0; // Очищаем ячейку
                 return;
             }
             index = (index + step) % table.size();
@@ -112,8 +94,8 @@ public:
     void PrintHash() {
         cout << "========================[ Print hash ]========================" << endl;
         for (int i = 0; i < table.size(); ++i) {
-            if (table[i].accountNumber != 0) {
-                std::cout << "Hash " << i << ": (" << table[i].accountNumber << ", " << table[i].fullName << ", " << table[i].address << ")" << std::endl;
+            if (table[i] != 0) {
+                std::cout << "Hash " << i << ": (" << table[i] << ")" << std::endl;
             }
         }
     }
@@ -121,25 +103,20 @@ public:
 // Сделать HashTest
     void testHeshT() {
         HashTable table;
-        BankAccount bankAccount;
-        bankAccount.accountNumber = 1;
-        table.Insert(bankAccount);
-        bankAccount.accountNumber += 1;
-        table.Insert(bankAccount);
-        bankAccount.accountNumber += 1;
-        table.Insert(bankAccount);
-        bankAccount.accountNumber += 1;
-        table.Insert(bankAccount);
+        int bankAccount;
+        table.Insert(1);
+        table.Insert(2);
+        table.Insert(3);
+        table.Insert(4);
         table.PrintHash();
         cout << "Add elem" << endl;
-        bankAccount.accountNumber += 1;
-        table.Insert(bankAccount);
+        table.Insert(5);
         table.PrintHash();
         cout << "delete elem with key 4" << endl;
         table.Remove(4);
         table.PrintHash();
         bankAccount = table.Search(3);
-        std::cout << "Hash " << 4 << ": (" << bankAccount.accountNumber << ", " << bankAccount.fullName << ", " << bankAccount.address << ")" << std::endl;
+        std::cout << "Hash " << 3 << " was found on pos: (" << bankAccount - 1<< ")" << std::endl;
     }
 
 };
