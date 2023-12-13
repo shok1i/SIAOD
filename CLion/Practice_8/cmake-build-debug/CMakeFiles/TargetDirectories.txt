@@ -1,0 +1,3 @@
+C:/Users/shilo/Documents/GitClones/SIAOD/CLion/Practice_8/cmake-build-debug/CMakeFiles/Practice_8.dir
+C:/Users/shilo/Documents/GitClones/SIAOD/CLion/Practice_8/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/shilo/Documents/GitClones/SIAOD/CLion/Practice_8/cmake-build-debug/CMakeFiles/rebuild_cache.dir
