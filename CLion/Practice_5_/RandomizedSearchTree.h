@@ -106,7 +106,7 @@ private:
                 std::cout << "   ";
             }
             cout << level;
-            std::cout << "-> " << node->key << "\\" << node->ptr->key << "\\" << node->ptr->brand << std::endl;
+            std::cout << "-> " << node->key << std::endl;
             printTreeRecursive(node->left, level + 1);
         }
     }
